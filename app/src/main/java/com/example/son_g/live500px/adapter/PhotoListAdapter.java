@@ -3,6 +3,7 @@ package com.example.son_g.live500px.adapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.example.son_g.live500px.view.PhotoListItem;
 
@@ -30,10 +31,10 @@ public class PhotoListAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         PhotoListItem item;
-        if(view == null){
-            item = new PhotoListItem(viewGroup.getContext());
-        }else{
+        if(view != null){
             item = (PhotoListItem) view;
+        }else{
+            item = new PhotoListItem(viewGroup.getContext());
         }
         return item;
     }
