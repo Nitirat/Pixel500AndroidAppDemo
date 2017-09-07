@@ -11,7 +11,9 @@ import android.widget.Toast;
 import com.example.son_g.live500px.R;
 import com.example.son_g.live500px.adapter.PhotoListAdapter;
 import com.example.son_g.live500px.dao.PhotoItemCollectionDao;
+import com.example.son_g.live500px.manager.Contextor;
 import com.example.son_g.live500px.manager.HttpManager;
+import com.example.son_g.live500px.manager.PhotoListManager;
 
 import java.io.IOException;
 
@@ -61,12 +63,14 @@ public class MainFragment extends Fragment {
                                    Response<PhotoItemCollectionDao> response) {
                 if(response.isSuccessful()){
                     PhotoItemCollectionDao dao = response.body();
-                    Toast.makeText(getActivity(),
+                    PhotoListManager.getInstance().setDao(dao);
+                    photoListAdapter.notifyDataSetChanged();
+                    Toast.makeText(Contextor.getInstance().getContext(),
                             dao.getData().get(0).getCaption(),
                             Toast.LENGTH_SHORT).show();
                 }else{
                     try {
-                        Toast.makeText(getActivity(),
+                        Toast.makeText(Contextor.getInstance().getContext(),
                                 response.errorBody().string(),
                                 Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
@@ -78,7 +82,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onFailure(Call<PhotoItemCollectionDao> call,
                                   Throwable t) {
-                Toast.makeText(getActivity(),
+                Toast.makeText(Contextor.getInstance().getContext(),
                         t.toString(),
                         Toast.LENGTH_SHORT).show();
             }

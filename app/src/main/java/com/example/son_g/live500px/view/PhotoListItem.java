@@ -5,13 +5,22 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.son_g.live500px.R;
+import com.example.son_g.live500px.manager.Contextor;
 
 /**
  * Created by son_g on 9/3/2017.
  */
 public class PhotoListItem extends BaseCustomViewGroup {
+
+    ImageView ivImg;
+    TextView tvName;
+    TextView tvDescription;
 
     public PhotoListItem(Context context) {
         super(context);
@@ -47,6 +56,9 @@ public class PhotoListItem extends BaseCustomViewGroup {
 
     private void initInstances() {
         // findViewById here
+        ivImg = findViewById(R.id.ivImg);
+        tvName = findViewById(R.id.tvName);
+        tvDescription = findViewById(R.id.tvDescription);
     }
 
     private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -94,5 +106,19 @@ public class PhotoListItem extends BaseCustomViewGroup {
         super.onMeasure(widthMeasureSpec, newHeightMeasureSpec);
 
         setMeasuredDimension(width, hight);
+    }
+
+    public void setNameText(String name) {
+        tvName.setText(name);
+    }
+
+    public void setDescriptionText(String description) {
+        tvDescription.setText(description);
+    }
+
+    public void setImgUrl(String url) {
+        Glide.with(getContext())
+                .load(url)
+                .into(ivImg);
     }
 }
