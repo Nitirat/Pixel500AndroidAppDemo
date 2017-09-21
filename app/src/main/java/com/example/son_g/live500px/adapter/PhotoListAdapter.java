@@ -2,9 +2,12 @@ package com.example.son_g.live500px.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
+import com.example.son_g.live500px.R;
+import com.example.son_g.live500px.dao.PhotoItemCollectionDao;
 import com.example.son_g.live500px.dao.PhotoItemDao;
 import com.example.son_g.live500px.manager.PhotoListManager;
 import com.example.son_g.live500px.view.PhotoListItem;
@@ -15,18 +18,25 @@ import com.example.son_g.live500px.view.PhotoListItem;
 
 public class PhotoListAdapter extends BaseAdapter{
 
+    PhotoItemCollectionDao dao;
+    int lastPosition = -1;
+
+    public void setDao(PhotoItemCollectionDao dao) {
+        this.dao = dao;
+    }
+
     @Override
     public int getCount() {
-        if(PhotoListManager.getInstance().getDao() == null)
+        if(dao == null)
             return 0;
-        if(PhotoListManager.getInstance().getDao().getData() == null)
+        if(dao.getData() == null)
             return 0;
-        return PhotoListManager.getInstance().getDao().getData().size();
+        return dao.getData().size();
     }
 
     @Override
     public Object getItem(int i) {
-        return PhotoListManager.getInstance().getDao().getData().get(i);
+        return dao.getData().get(i);
     }
 
     @Override
@@ -49,6 +59,12 @@ public class PhotoListAdapter extends BaseAdapter{
         item.setDescriptionText(dao.getUsername()+"\n"+dao.getCamera());
         item.setImgUrl(dao.getImageUrl());
 
+        if(i > lastPosition){
+            Animation anim = AnimationUtils.loadAnimation(viewGroup.getContext(),
+                    R.anim.up_from_bottom);
+            item.startAnimation(anim);
+            lastPosition = i;
+        }
         return item;
     }
 }

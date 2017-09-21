@@ -9,8 +9,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/mock" />
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
         android:layout_width="match_parent"

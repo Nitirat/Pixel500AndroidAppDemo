@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.son_g.live500px.R;
 import com.example.son_g.live500px.manager.Contextor;
 
@@ -117,7 +118,10 @@ public class PhotoListItem extends BaseCustomViewGroup {
     }
 
     public void setImgUrl(String url) {
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(R.drawable.loading);
         Glide.with(getContext())
+                .setDefaultRequestOptions(requestOptions)
                 .load(url)
                 .into(ivImg);
     }
