@@ -30,4 +30,20 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.github.bumptech.glide:glide:4.1.1'
+    compile('com.mikepenz:materialdrawer:5.9.5@aar') {
+        transitive = true
+    }
+    compile "com.mikepenz:iconics-core:2.9.3@aar"
+    compile 'com.mikepenz:google-material-typeface:3.0.1.1.original@aar'
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.0.2'
+            }
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.son_g.live500px.dao;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
  * Created by son_g on 9/5/2017.
  */
 
-public class PhotoItemDao {
+public class PhotoItemDao implements Comparable<PhotoItemDao>{
     @SerializedName("link")
     private String link;
     @SerializedName("image_url")
@@ -39,6 +41,8 @@ public class PhotoItemDao {
     private String shutterSpeed;
     @SerializedName("aperture")
     private String aperture;
+    @SerializedName("id")
+    private int id;
 
 
     public String getLink() {
@@ -151,5 +155,23 @@ public class PhotoItemDao {
 
     public void setAperture(String aperture) {
         this.aperture = aperture;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+    @Override
+    public int compareTo(@NonNull PhotoItemDao empl) {
+        if(this.id >= empl.getId()){
+            return this.id;
+        }else{
+            return empl.getId();
+        }
     }
 }

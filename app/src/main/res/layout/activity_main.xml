@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_dark_cards"
     tools:context="com.example.son_g.live500px.activity.MainActivity">
 
 
